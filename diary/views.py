@@ -3,6 +3,8 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Book
 from .forms import BookCreateForm
+from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 
 
@@ -19,14 +21,26 @@ class BookListView(LoginRequiredMixin, generic.ListView):
         return books
 
 
-class BookCreateView(LoginRequiredMixin, generic.CreateView):
-    model = Book
+class BookCreateView(generic.FormView):
     template_name = 'book_create.html'
     form_class = BookCreateForm
-    success_url = reverse_lazy('diary:book_list')
 
-    def form_valid(self, form):
-        book = form.save(commit=False)
-        book.user = self.request.user
+
+def bookcreate(request, *args, **kwargs):
+    if request.method == "POST":
+        title = request.POST['title']
+        author = request.POST['author']
+        genre = request.POST['genre']
+        type = request.POST['type']
+
+        book = Book()
+        book.title = title
+        book.author = author
+        book.genre = genre
+        book.type = type
+        book.user_id = request.user.id
         book.save()
-        return super().form_valid(form)
+        return redirect(to='/book-list')
+    else:
+        form = BookCreateForm
+    return render(request, 'book_create.html', {'form': form})
