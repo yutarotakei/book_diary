@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book_list</title>
+</head>
+
+<body>
+
+
+<table border="1">
+        <tr>
+            <th>タイトル</th>
+            <th>著者名</th>
+            <th>日時</th>
+        </tr>
+        {% for book in book_list %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.read_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+
+
+</body>
+</html>
