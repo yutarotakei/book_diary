@@ -31,6 +31,8 @@
         <tr>
             <th>タイトル</th>
             <th>著者名</th>
+            <th>形態</th>
+            <th>ジャンル</th>
             <th>日時</th>
         </tr>
   </thead>
@@ -41,7 +43,8 @@
             <td>{{ book.author }}</td>
             <td>{{ book.genre }}</td>
             <td>{{ book.type }}</td>
-            <td>{{ book.read_at }}</td>
+            <td>{{ book.read_at|date:"y年/ n/ j" }}</td>
+            <td><a class="btn btn-primary" href="{% url 'diary:book_delete' book.pk %}">削除</a></td>
         </tr>
         {% endfor %}
     </tbody>

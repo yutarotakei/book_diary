@@ -26,12 +26,21 @@ class BookCreateView(generic.FormView):
     form_class = BookCreateForm
 
 
+class BookDeleteView(generic.DeleteView):
+    model = Book
+    template_name = 'book_delete.html'
+    success_url = reverse_lazy('diary:book_list')
+
+
 def bookcreate(request, *args, **kwargs):
     if request.method == "POST":
         title = request.POST['title']
         author = request.POST['author']
         genre = request.POST['genre']
         type = request.POST['type']
+
+        dict = {'1': '新書', '2': '文庫', '3': '技術書', '4': '専門書', '5': '単行本'}
+        genre = dict[genre]
 
         book = Book()
         book.title = title
