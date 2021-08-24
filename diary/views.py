@@ -7,6 +7,14 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 
+import matplotlib
+
+# バックエンドを指定
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import io
+from django.http import HttpResponse
+
 
 class IndexView(generic.TemplateView):
     template_name = 'index.html'
@@ -53,3 +61,31 @@ def bookcreate(request, *args, **kwargs):
     else:
         form = BookCreateForm
     return render(request, 'book_create.html', {'form': form})
+
+
+
+# グラフ作成
+
+
+
+# SVG化
+def plt2svg():
+    buf = io.BytesIO()
+    plt.savefig(buf, format='svg', bbox_inches='tight')
+    s = buf.getvalue()
+    buf.close()
+    return s
+
+
+# 実行するビュー関数
+def get_svg(request):
+    x = ["1", "2", "3", "4", "5", "6", "7", "8", "9","10", "11", "12"]
+    y = [3, 5, 0, 5, 6, 10, 2, 3, 4, 7, 4, 5]
+    plt.bar(x, y, color='#00d5ff')
+    plt.title("the number of books you read")
+    plt.xlabel("Month")
+    plt.ylabel("book")
+    svg = plt2svg()  # SVG化
+    plt.cla()  # グラフをリセット
+    response = HttpResponse(svg, content_type='image/svg+xml')
+    return response
