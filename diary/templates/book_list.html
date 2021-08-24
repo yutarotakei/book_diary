@@ -18,7 +18,7 @@
         <a class="nav-link" href="{% url 'diary:book_create' %}">新規作成 <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#!">#</a>
+        <a class="nav-link" href="#!">グラフ</a>
       </li>
     </ul>
   </div>
@@ -34,6 +34,7 @@
             <th>形態</th>
             <th>ジャンル</th>
             <th>日時</th>
+            <th></th>
         </tr>
   </thead>
         {% for book in book_list %}
