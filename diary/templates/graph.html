@@ -1,3 +1,5 @@
+app_name = 'diary'
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +7,11 @@
     <title>グラフ</title>
 </head>
 <body>
-
+<h1>hello</h1>
+<div style="width:1000;height:100">
+{{ graph_div|safe }}
+</div>
 </body>
 </html>
 
 
-
-app_name = 'diary'
-<img src="{% url 'diary:plot' %}" width=800 height=600>
