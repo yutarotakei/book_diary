@@ -9,4 +9,5 @@ urlpatterns = [
     path('book-create/', views.bookcreate, name='book_create'),
     path('book-delete/<int:pk>/', views.BookDeleteView.as_view(), name='book_delete'),
     path('plot/', views.get_svg, name='plot'),
+    path('book-update/<int:pk>/', views.BookUpdateView.as_view(), name='book_update'),
 ]

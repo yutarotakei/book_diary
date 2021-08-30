@@ -35,6 +35,7 @@
             <th>ジャンル</th>
             <th>日時</th>
             <th></th>
+            <th></th>
         </tr>
   </thead>
         {% for book in book_list %}
@@ -46,6 +47,8 @@
             <td>{{ book.type }}</td>
             <td>{{ book.read_at|date:"y年/ n/ j" }}</td>
             <td><a class="btn btn-primary" href="{% url 'diary:book_delete' book.pk %}">削除</a></td>
+            <td><a class="btn btn-secondary" href="{% url 'diary:book_update' book.pk %}">更新</a></td>
+
         </tr>
         {% endfor %}
     </tbody>

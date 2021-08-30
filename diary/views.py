@@ -88,3 +88,10 @@ def get_svg(request):
     plt.cla()  # グラフをリセット
     response = HttpResponse(svg, content_type='image/svg+xml')
     return response
+
+
+class BookUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Book
+    template_name = 'book_update.html'
+    form_class = BookCreateForm
+    success_url = reverse_lazy('diary:book_list')
